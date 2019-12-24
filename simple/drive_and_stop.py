@@ -13,14 +13,21 @@ try:
     frontToF.SensorInit()
     rearToF.SensorInit()
 except Exception as e:
-    print(e)
+    if e == OSError or e == IOError:
+        print("Issue connecting to device.")
+        print(e)
+    else:
+        print(e)
+else:
+        break
+
 
 while True:
     try:
-        frontToF.StartRanging()						 # Write configuration bytes to initiate measurement
-        rearToF.StartRanging()	
+        frontToF.StartRanging()                                          # Write configuration bytes to initiate measurement
+        rearToF.StartRanging()
         time.sleep(.005)
-        frontDistance = frontToF.GetDistance()	 # Get the result of the measurement from the sensor
+        frontDistance = frontToF.GetDistance()   # Get the result of the measurement from the sensor
         rearDistance = rearToF.GetDistance()
         time.sleep(.005)
         frontToF.StopRanging()
@@ -29,4 +36,4 @@ while True:
         print("Front: %s | Rear: %s" % (frontDistance, rearDistance))
 
     except Exception as e:
-        print(e)
+        print(e)          
