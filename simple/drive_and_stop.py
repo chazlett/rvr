@@ -18,8 +18,6 @@ except Exception as e:
         print(e)
     else:
         print(e)
-else:
-        break
 
 
 while True:
